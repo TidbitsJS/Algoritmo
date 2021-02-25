@@ -4,8 +4,6 @@ Number guessing Application using prompt-sync & colors
 
 #### Guidelines
 
-#### Guidelines
-
 You should have Node installed in your system for running the script -
 
 ```javascript
