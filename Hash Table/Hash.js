@@ -26,7 +26,6 @@ class HashTable {
   get(key) {
     let address = this._hash(key);
     const currentBucket = this.data[address];
-
     if (currentBucket.length) {
       for (let i = 0; i < currentBucket.length; i++) {
         if (currentBucket[i][0] === key) {
@@ -38,6 +37,12 @@ class HashTable {
       }
     }
     return undefined;
+  }
+
+  deleteItem(value) {
+    let item = this.get(value);
+    delete this.data[item.location];
+    return console.log("Deleted", item.data[0]);
   }
 
   keys() {
@@ -65,4 +70,8 @@ found = myHashTable.get("oranges");
 console.log("Found", found);
 
 let keys = myHashTable.keys();
+console.log(keys);
+
+myHashTable.deleteItem("apple");
+keys = myHashTable.keys();
 console.log(keys);
