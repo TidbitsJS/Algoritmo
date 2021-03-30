@@ -11,14 +11,14 @@ colors.setTheme({
 });
 
 class Node {
-  constructor(value, next = null) {
+  constructor(value = null, next = null) {
     this.value = value;
     this.next = next;
   }
 }
 
 class LinkedList {
-  constructor(value) {
+  constructor(value = null) {
     this.head = {
       value: value,
       next: null,
@@ -26,6 +26,7 @@ class LinkedList {
 
     this.tail = this.head;
     this.length = 1;
+    this.sortedLL = new Node();
   }
 
   traverseToIndex(index) {
@@ -115,7 +116,110 @@ class LinkedList {
     return this;
   }
 
-  printList() {
+  bubbleSort() {
+    let firstNode, secondNode;
+    firstNode = this.head;
+
+    while (firstNode !== null) {
+      secondNode = this.head;
+
+      while (secondNode !== null) {
+        if (firstNode.value < secondNode.value) {
+          let temp = secondNode.value;
+          secondNode.value = firstNode.value;
+          firstNode.value = temp;
+        }
+
+        secondNode = secondNode.next;
+      }
+
+      firstNode = firstNode.next;
+    }
+
+    return this;
+  }
+
+  getMidNode(start, last) {
+    if (start === null) return null;
+
+    let slowTraverse = start;
+    let fastTraverse = start.next;
+
+    while (fastTraverse !== last && fastTraverse.next !== null) {
+      fastTraverse = fastTraverse.next.next;
+      slowTraverse = slowTraverse.next;
+    }
+
+    return slowTraverse;
+  }
+
+  setMergeSort() {
+    let head = this.mergeSort(this.head);
+    let setTail = head;
+
+    while (setTail.next !== null) setTail = setTail.next;
+    console.log(setTail);
+
+    return (this.tail = setTail);
+  }
+
+  mergeSort(linkedList) {
+    let start = linkedList;
+    let last = null;
+    if (start.next === null) return start;
+
+    let middle = this.getMidNode(start, last);
+    let middleNext = middle.next;
+    middle.next = null;
+
+    let rightPart = middleNext;
+    let leftPart = start;
+
+    this.head = this.mergeLL(
+      this.mergeSort(leftPart),
+      this.mergeSort(rightPart)
+    );
+
+    return this.head;
+  }
+
+  mergeLL(left, right) {
+    let sorted;
+
+    if (left === null) return right;
+    if (right === null) return left;
+
+    if (left.value < right.value) {
+      sorted = new Node(left.value);
+      sorted.next = this.mergeLL(left.next, right);
+    } else {
+      sorted = new Node(right.value);
+      sorted.next = this.mergeLL(left, right.next);
+    }
+
+    return sorted;
+  }
+
+  binarySearch(key) {
+    let startNode = this.head;
+    let lastNode = null;
+
+    do {
+      let mid = this.getMidNode(startNode, lastNode);
+
+      if (mid === null) return null;
+      if (mid.value === key) return console.log("Found ", mid.value);
+      else if (mid.value < key) {
+        startNode = mid.next;
+      } else {
+        lastNode = mid;
+      }
+    } while (lastNode === null || lastNode !== startNode);
+
+    return console.log("Not Found");
+  }
+
+  printList(node = this.head) {
     const array = [];
     let currentNode = this.head;
 
@@ -149,6 +253,9 @@ do {
   console.log("4. Insert anywhere in between the Linked List".insert);
   console.log("5. Reverse a Linked List".display);
   console.log("6. Delete element from Linked List".delete);
+  console.log("7. Sort the Linked List using Bubble Sort".insert);
+  console.log("8. Sort the Linked List using Merge Sort".insert);
+  console.log("9. Search node using Binary Search".display);
 
   choice = +prompt("Enter your choice - ");
 
@@ -203,6 +310,28 @@ do {
 
       myLinkedList.remove(index);
       console.log("After Deletion Linked List - ", myLinkedList.printList());
+      break;
+
+    case 7:
+      if (myLinkedList.length === 0) {
+        console.log("Linked List is Empty");
+      } else {
+        myLinkedList.bubbleSort();
+        console.log("After sorting - ", myLinkedList.printList());
+      }
+
+      break;
+
+    case 8:
+      myLinkedList.sortedLL = null;
+      myLinkedList.setMergeSort();
+      console.log("After merge sort - ", myLinkedList.printList());
+      break;
+
+    case 9:
+      value = +prompt("Enter Value to Search - ");
+      myLinkedList.bubbleSort();
+      myLinkedList.binarySearch(value);
       break;
 
     default:
