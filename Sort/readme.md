@@ -7,4 +7,5 @@
 - [Insertion Sort](./InsertionSort.js)
 - [Merge Sort](./MergeSort.js)
 - [Stooge Sort](./StoogeSort.js)
+- [Tim Sort](./TimSort.js)
 - [Wave Sort](./WaveSort.js)
