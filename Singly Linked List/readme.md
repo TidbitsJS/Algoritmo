@@ -8,14 +8,41 @@ A Singly Linked List program in JS where you can do following things -
 4. Insert an element at any given position in Linked List
 5. Delete any element of the Linked List
 6. Reverse the given Linked List
+7. Sort the Linked List using Bubble Sort
+8. Sort the Linked List using Merge Sort
+9. Search node using Binary Search
 
-#### Guidelines
+### Guidelines
 
-You should have Node installed in your system for running the script -
+You should have Node installed in your system for running the script
 
-```javascript
-const prompt = require("prompt-sync")({ sigint: true }); // For User Input
-const colors = require("colors"); // Just the terminal colors
-```
+#### Libraries
 
-> Don't forget to install those packages in your system
+1. prompt sync
+
+   - NPM
+
+     ```code
+        npm install prompt-sync
+     ```
+
+   - Yarn
+
+     ```code
+        yarn add prompt-sync
+     ```
+
+2. color
+
+   - NPM
+
+     ```code
+        npm install color
+     ```
+
+   - Yarn
+     ```code
+        yarn add color
+     ```
+
+Don't forget to install those packages in your system ( either with npm or yarn package manager )
